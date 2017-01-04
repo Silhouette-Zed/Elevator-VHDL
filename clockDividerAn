@@ -1,0 +1,35 @@
+--create component clockDividerAn
+--U3: clockDividerAn port map(clk,reset,clkAn);
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity clockDividerAn is
+    Port ( clockIn : in STD_LOGIC;
+           resetClk : in STD_LOGIC;
+           clockOut : out STD_LOGIC);
+end clockDividerAn;
+
+architecture Behavioral of clockDividerAn is
+signal temp : STD_LOGIC;
+begin
+
+frequencyDivider: process (clockIn,resetClk)
+                  variable count : integer range 0 to 6000000 := 0;  
+                  begin
+                    if resetClk = '1' then
+                        temp <= '0';
+                        count := 0;
+                    elsif rising_edge(clockIn) then
+                        if (count = 6000000) then--24
+                            temp <= NOT(temp);
+                            count := 0;
+                        else
+                            count := count + 1;
+                        end if;
+                    end if;
+                    
+                    end process;
+                    
+   clockOut <= temp;
+end Behavioral;
