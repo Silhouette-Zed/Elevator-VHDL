@@ -15,13 +15,13 @@ signal temp : STD_LOGIC;
 begin
 
 frequencyDivider: process (clockIn,resetClk)
-                  variable count : integer range 0 to 6000000 := 0;  
+                  variable count : integer range 0 to 8000000 := 0;  
                   begin
                     if resetClk = '1' then
                         temp <= '0';
                         count := 0;
                     elsif rising_edge(clockIn) then
-                        if (count = 6000000) then--24
+                        if (count = 8000000) then
                             temp <= NOT(temp);
                             count := 0;
                         else
